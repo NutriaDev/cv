@@ -41,7 +41,18 @@
     <div class="section-divider"></div>
     <div *ngFor="let exp of cv.experiences" class="exp-entry">
       <div class="exp-header">
-        <span class="exp-company">{{ exp.company }}</span>
+        <a
+          *ngIf="exp.companyUrl; else noLink"
+          [href]="exp.companyUrl"
+          target="_blank"
+          class="exp-company"
+          style="text-decoration: underline; cursor: pointer"
+        >
+          {{ exp.company }}
+        </a>
+        <ng-template #noLink>
+          <span class="exp-company">{{ exp.company }}</span>
+        </ng-template>
         <span class="exp-location">{{ exp.location }}</span>
       </div>
       <div class="exp-sub">
