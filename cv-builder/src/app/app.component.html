@@ -21,17 +21,17 @@
       <!-- ── ENCABEZADO ── -->
       <ng-container *ngIf="activeSection === 'header'">
         <div class="section-label">ENCABEZADO</div>
-        <div class="field-group"><label>Nombre completo</label><input type="text" [value]="cv.header.name" (input)="updateHeader('name', $any($event.target).value)" /></div>
+        <div class="field-group"><label>Nombre completo</label><input type="text" [value]="cv.header.name" (change)="updateHeader('name', $any($event.target).value)" /></div>
         <div class="field-row">
-          <div class="field-group"><label>Ciudad / País</label><input type="text" [value]="cv.header.location" (input)="updateHeader('location', $any($event.target).value)" /></div>
-          <div class="field-group"><label>Teléfono</label><input type="text" [value]="cv.header.phone" (input)="updateHeader('phone', $any($event.target).value)" /></div>
+          <div class="field-group"><label>Ciudad / País</label><input type="text" [value]="cv.header.location" (change)="updateHeader('location', $any($event.target).value)" /></div>
+          <div class="field-group"><label>Teléfono</label><input type="text" [value]="cv.header.phone" (change)="updateHeader('phone', $any($event.target).value)" /></div>
         </div>
-        <div class="field-group"><label>Email</label><input type="text" [value]="cv.header.email" (input)="updateHeader('email', $any($event.target).value)" /></div>
-        <div class="field-group"><label>LinkedIn URL</label><input type="text" [value]="cv.header.linkedin" (input)="updateHeader('linkedin', $any($event.target).value)" placeholder="https://linkedin.com/in/..." /></div>
-        <div class="field-group"><label>GitHub URL</label><input type="text" [value]="cv.header.github" (input)="updateHeader('github', $any($event.target).value)" placeholder="https://github.com/..." /></div>
+        <div class="field-group"><label>Email</label><input type="text" [value]="cv.header.email" (change)="updateHeader('email', $any($event.target).value)" /></div>
+        <div class="field-group"><label>LinkedIn URL</label><input type="text" [value]="cv.header.linkedin" (change)="updateHeader('linkedin', $any($event.target).value)" placeholder="https://linkedin.com/in/..." /></div>
+        <div class="field-group"><label>GitHub URL</label><input type="text" [value]="cv.header.github" (change)="updateHeader('github', $any($event.target).value)" placeholder="https://github.com/..." /></div>
         <div class="field-row">
-          <div class="field-group"><label>TikTok</label><input type="text" [value]="cv.header.tiktok" (input)="updateHeader('tiktok', $any($event.target).value)" placeholder="@usuario" /></div>
-          <div class="field-group"><label>YouTube</label><input type="text" [value]="cv.header.youtube" (input)="updateHeader('youtube', $any($event.target).value)" /></div>
+          <div class="field-group"><label>TikTok</label><input type="text" [value]="cv.header.tiktok" (change)="updateHeader('tiktok', $any($event.target).value)" placeholder="@usuario" /></div>
+          <div class="field-group"><label>YouTube</label><input type="text" [value]="cv.header.youtube" (change)="updateHeader('youtube', $any($event.target).value)" /></div>
         </div>
       </ng-container>
 
