@@ -1,0 +1,60 @@
+<div class="exp-list">
+  <div
+    *ngFor="let exp of items; let i = index"
+    class="exp-card"
+    [class.dragging]="dragFromIdx === i"
+    [class.drag-over]="dragOverIdx === i && dragFromIdx !== i"
+    [class.expanded]="expandedId === exp.id"
+    draggable="true"
+    (dragstart)="onDragStart(i)"
+    (dragover)="onDragOver($event, i)"
+    (drop)="onDrop(i)"
+    (dragend)="onDragEnd()"
+  >
+    <!-- Card Header -->
+    <div class="card-header">
+      <span class="drag-handle">⠿</span>
+      <div class="card-info">
+        <span class="card-company">{{ exp.company }}</span>
+        <span class="card-period">{{ exp.period }}</span>
+      </div>
+      <button class="btn-icon" [class.active]="expandedId === exp.id" (click)="toggle(exp.id)" title="Editar">
+        {{ expandedId === exp.id ? '▲' : '✏' }}
+      </button>
+      <button class="btn-icon danger" (click)="remove(exp.id)" title="Eliminar">✕</button>
+    </div>
+
+    <!-- Card Body (expanded) -->
+    <div class="card-body" *ngIf="expandedId === exp.id">
+      <div class="field-row">
+        <div class="field-group">
+          <label>Empresa</label>
+          <input type="text" [(ngModel)]="exp.company" (ngModelChange)="updateField(exp.id, 'company', $event)" />
+        </div>
+        <div class="field-group">
+          <label>Ubicación</label>
+          <input type="text" [(ngModel)]="exp.location" (ngModelChange)="updateField(exp.id, 'location', $event)" />
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Cargo / Rol</label>
+        <input type="text" [(ngModel)]="exp.role" (ngModelChange)="updateField(exp.id, 'role', $event)" />
+      </div>
+      <div class="field-group">
+        <label>Periodo</label>
+        <input type="text" [(ngModel)]="exp.period" (ngModelChange)="updateField(exp.id, 'period', $event)" />
+      </div>
+      <div class="field-group">
+        <label>Logros <small>(una línea = un bullet)</small></label>
+        <textarea
+          rows="6"
+          [value]="getBulletsText(exp)"
+          (input)="updateBullets(exp, $any($event.target).value)"
+          placeholder="Cada línea se convierte en un punto del CV..."
+        ></textarea>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-add" (click)="add()">+ Agregar experiencia</button>
+</div>

@@ -1,0 +1,145 @@
+<!-- TOAST -->
+<div class="toast" *ngIf="toast" [class.toast-error]="!toast.ok">{{ toast.msg }}</div>
+
+<div class="app-layout">
+
+  <!-- ══ LEFT: EDITOR PANEL ══ -->
+  <aside class="editor-panel">
+    <div class="panel-brand">
+      <span class="brand-icon">◈</span>
+      <span class="brand-name">CV Builder</span>
+    </div>
+
+    <nav class="section-nav">
+      <button *ngFor="let sec of sections" class="nav-btn" [class.active]="activeSection === sec.key" (click)="activeSection = sec.key">
+        <span class="nav-icon">{{ sec.icon }}</span>{{ sec.label }}
+      </button>
+    </nav>
+
+    <div class="editor-content">
+
+      <!-- ── ENCABEZADO ── -->
+      <ng-container *ngIf="activeSection === 'header'">
+        <div class="section-label">ENCABEZADO</div>
+        <div class="field-group"><label>Nombre completo</label><input type="text" [value]="cv.header.name" (input)="updateHeader('name', $any($event.target).value)" /></div>
+        <div class="field-row">
+          <div class="field-group"><label>Ciudad / País</label><input type="text" [value]="cv.header.location" (input)="updateHeader('location', $any($event.target).value)" /></div>
+          <div class="field-group"><label>Teléfono</label><input type="text" [value]="cv.header.phone" (input)="updateHeader('phone', $any($event.target).value)" /></div>
+        </div>
+        <div class="field-group"><label>Email</label><input type="text" [value]="cv.header.email" (input)="updateHeader('email', $any($event.target).value)" /></div>
+        <div class="field-group"><label>LinkedIn URL</label><input type="text" [value]="cv.header.linkedin" (input)="updateHeader('linkedin', $any($event.target).value)" placeholder="https://linkedin.com/in/..." /></div>
+        <div class="field-group"><label>GitHub URL</label><input type="text" [value]="cv.header.github" (input)="updateHeader('github', $any($event.target).value)" placeholder="https://github.com/..." /></div>
+        <div class="field-row">
+          <div class="field-group"><label>TikTok</label><input type="text" [value]="cv.header.tiktok" (input)="updateHeader('tiktok', $any($event.target).value)" placeholder="@usuario" /></div>
+          <div class="field-group"><label>YouTube</label><input type="text" [value]="cv.header.youtube" (input)="updateHeader('youtube', $any($event.target).value)" /></div>
+        </div>
+      </ng-container>
+
+      <!-- ── PERFIL ── -->
+      <ng-container *ngIf="activeSection === 'profile'">
+        <div class="section-label">PERFIL PROFESIONAL</div>
+        <div class="field-group" style="margin-bottom:16px">
+          <label>Perfil activo (aparece en el CV)</label>
+          <select [value]="cv.activeProfileId" (change)="cvService.update({ activeProfileId: +$any($event.target).value })">
+            <option *ngFor="let p of cv.profiles" [value]="p.id">{{ p.name }}</option>
+          </select>
+        </div>
+        <div *ngFor="let p of cv.profiles" class="profile-card" [class.active]="p.id === cv.activeProfileId">
+          <div class="profile-card-header">
+            <input type="text" [value]="p.name" (input)="updateProfile(p.id, 'name', $any($event.target).value)" class="profile-name-input" placeholder="Nombre del perfil" />
+            <button *ngIf="cv.profiles.length > 1" class="btn-icon danger" (click)="removeProfile(p.id)">✕</button>
+          </div>
+          <textarea rows="5" [value]="p.text" (input)="updateProfile(p.id, 'text', $any($event.target).value)" placeholder="Resumen profesional para este stack..."></textarea>
+          <button *ngIf="p.id !== cv.activeProfileId" class="btn-use" (click)="cvService.update({ activeProfileId: p.id })">Usar este perfil →</button>
+        </div>
+        <button class="btn-add" (click)="addProfile()">+ Nuevo perfil de stack</button>
+      </ng-container>
+
+      <!-- ── EXPERIENCIA ── -->
+      <ng-container *ngIf="activeSection === 'experience'">
+        <div class="section-label">EXPERIENCIA PROFESIONAL</div>
+        <p class="hint">Arrastra ⠿ para reordenar</p>
+        <app-experience-editor field="experiences"></app-experience-editor>
+      </ng-container>
+
+      <!-- ── EMPRESARIAL ── -->
+      <ng-container *ngIf="activeSection === 'enterprise'">
+        <div class="section-label">EXPERIENCIA EMPRESARIAL</div>
+        <p class="hint">Arrastra ⠿ para reordenar</p>
+        <app-experience-editor field="enterpriseExperiences"></app-experience-editor>
+      </ng-container>
+
+      <!-- ── TECH SKILLS ── -->
+      <ng-container *ngIf="activeSection === 'skills'">
+        <div class="section-label">HABILIDADES TÉCNICAS</div>
+        <p class="hint">Skills separadas por comas. Cada categoría = una fila.</p>
+        <div *ngFor="let s of cv.technicalSkills" class="skill-card">
+          <div class="skill-header">
+            <input type="text" [value]="s.category" (input)="updateSkill(s.id, 'category', $any($event.target).value)" class="skill-cat-input" placeholder="Categoría" />
+            <button class="btn-icon danger" (click)="removeSkill(s.id)">✕</button>
+          </div>
+          <textarea rows="2" [value]="s.skills" (input)="updateSkill(s.id, 'skills', $any($event.target).value)" placeholder="skill1, skill2, skill3..."></textarea>
+        </div>
+        <button class="btn-add" (click)="addSkill()">+ Agregar categoría</button>
+      </ng-container>
+
+      <!-- ── EDUCACIÓN ── -->
+      <ng-container *ngIf="activeSection === 'education'">
+        <div class="section-label">EDUCACIÓN</div>
+        <div *ngFor="let edu of cv.education" class="edu-card">
+          <div style="display:flex;justify-content:flex-end;margin-bottom:8px"><button class="btn-icon danger" style="font-size:10px;padding:3px 8px" (click)="removeEdu(edu.id)">✕ Eliminar</button></div>
+          <div class="field-row">
+            <div class="field-group"><label>Institución</label><input type="text" [value]="edu.institution" (input)="updateEdu(edu.id, 'institution', $any($event.target).value)" /></div>
+            <div class="field-group"><label>Ubicación</label><input type="text" [value]="edu.location" (input)="updateEdu(edu.id, 'location', $any($event.target).value)" /></div>
+          </div>
+          <div class="field-group"><label>Título / Programa</label><input type="text" [value]="edu.degree" (input)="updateEdu(edu.id, 'degree', $any($event.target).value)" /></div>
+          <div class="field-group"><label>Periodo</label><input type="text" [value]="edu.period" (input)="updateEdu(edu.id, 'period', $any($event.target).value)" /></div>
+        </div>
+        <button class="btn-add" (click)="addEdu()">+ Agregar educación</button>
+      </ng-container>
+
+      <!-- ── ADICIONALES ── -->
+      <ng-container *ngIf="activeSection === 'additional'">
+        <div class="section-label">IDIOMAS</div>
+        <div *ngFor="let l of cv.languages" class="lang-row">
+          <input type="text" [value]="l.language" (input)="updateLang(l.id, 'language', $any($event.target).value)" placeholder="Idioma" />
+          <input type="text" [value]="l.level" (input)="updateLang(l.id, 'level', $any($event.target).value)" placeholder="Nivel (B2, Nativo...)" />
+          <button class="btn-icon danger" (click)="removeLang(l.id)">✕</button>
+        </div>
+        <button class="btn-add" style="margin-bottom:24px" (click)="addLang()">+ Idioma</button>
+        <div class="section-label">HABILIDADES BLANDAS</div>
+        <div class="soft-chips">
+          <div *ngFor="let s of cv.softSkills" class="chip">
+            <input type="text" [value]="s.skill" (input)="updateSoft(s.id, $any($event.target).value)" [style.width.px]="Math.max(70, s.skill.length * 7)" />
+            <button (click)="removeSoft(s.id)">×</button>
+          </div>
+        </div>
+        <button class="btn-add" (click)="addSoft()">+ Habilidad blanda</button>
+      </ng-container>
+
+    </div>
+
+    <div class="panel-actions">
+      <button class="action-btn translate" (click)="translateToEnglish()" [disabled]="translating">
+        {{ translating ? 'Traduciendo...' : '🌐 Traducir a inglés' }}
+      </button>
+      <button class="action-btn pdf" (click)="exportPdf()">📄 Descargar PDF</button>
+      <div class="action-row-small">
+        <button class="action-sm" (click)="exportJson()">↓ JSON</button>
+        <label class="action-sm">↑ Importar<input type="file" accept=".json" style="display:none" (change)="onFileImport($event)" /></label>
+        <button class="action-sm danger" (click)="reset()">↺ Reset</button>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ══ RIGHT: PREVIEW ══ -->
+  <main class="preview-area">
+    <div class="preview-wrapper">
+      <div class="cv-paper">
+        <app-cv-preview></app-cv-preview>
+      </div>
+    </div>
+  </main>
+
+</div>

@@ -1,0 +1,137 @@
+.cv-page {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  color: #111;
+  font-size: 11px;
+  line-height: 1.5;
+  background: white;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+// ── HEADER ────────────────────────────────────────
+.cv-header {
+  text-align: center;
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid #111;
+
+  h1 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    letter-spacing: 0.01em;
+    font-family: 'Georgia', serif;
+  }
+}
+
+.cv-contact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px 12px;
+  font-size: 10px;
+  color: #333;
+
+  a {
+    color: #333;
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+  }
+}
+
+// ── SECTION ────────────────────────────────────────
+.cv-section {
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #111;
+  margin: 0 0 4px;
+  font-family: 'Georgia', serif;
+  text-transform: uppercase;
+}
+
+.section-divider {
+  height: 1px;
+  background: #333;
+  margin-bottom: 10px;
+}
+
+// ── PROFILE ────────────────────────────────────────
+.profile-text {
+  margin: 0;
+  text-align: justify;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+// ── EXPERIENCE ─────────────────────────────────────
+.exp-entry {
+  margin-bottom: 12px;
+}
+
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.exp-company {
+  font-weight: 700;
+  text-decoration: underline;
+  font-size: 11px;
+}
+
+.exp-location {
+  font-size: 10px;
+  color: #555;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.exp-sub {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 5px;
+}
+
+.exp-role {
+  font-size: 11px;
+}
+
+.exp-period {
+  font-size: 10px;
+  color: #555;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.exp-bullets {
+  margin: 0 0 0 16px;
+  padding: 0;
+
+  li {
+    font-size: 11px;
+    margin-bottom: 2px;
+    line-height: 1.45;
+
+    &.hidden { display: none; }
+  }
+}
+
+// ── SKILLS ─────────────────────────────────────────
+.skill-row {
+  font-size: 11px;
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+// ── EDUCATION ──────────────────────────────────────
+.edu-entry {
+  margin-bottom: 8px;
+}

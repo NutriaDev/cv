@@ -1,0 +1,120 @@
+<div class="cv-page" id="cv-content">
+
+  <!-- HEADER -->
+<header class="cv-header">
+  <h1>{{ cv.header.name }}</h1>
+  <div class="cv-contact">
+    <span *ngIf="cv.header.location">{{ cv.header.location }}</span>
+    <span *ngIf="cv.header.phone">{{ cv.header.phone }}</span>
+    
+    <a *ngIf="cv.header.email" [href]="'mailto:' + cv.header.email">
+      {{ cv.header.email }}
+    </a>
+
+    <a *ngIf="cv.header.linkedin" [href]="cv.header.linkedin" target="_blank">
+      LinkedIn
+    </a>
+
+    <a *ngIf="cv.header.github" [href]="cv.header.github" target="_blank">
+      GitHub
+    </a>
+
+    <a *ngIf="cv.header.tiktok" [href]="cv.header.tiktok" target="_blank">
+      TikTok
+    </a>
+
+    <a *ngIf="cv.header.youtube" [href]="cv.header.youtube" target="_blank">
+      YouTube
+    </a>
+  </div>
+</header>
+
+  <!-- PERFIL PROFESIONAL -->
+  <section *ngIf="activeProfile?.text" class="cv-section">
+    <h2 class="section-title">PERFIL PROFESIONAL</h2>
+    <div class="section-divider"></div>
+    <p class="profile-text">{{ activeProfile!.text }}</p>
+  </section>
+
+  <!-- EXPERIENCIA PROFESIONAL -->
+  <section *ngIf="cv.experiences.length > 0" class="cv-section">
+    <h2 class="section-title">EXPERIENCIA PROFESIONAL</h2>
+    <div class="section-divider"></div>
+    <div *ngFor="let exp of cv.experiences" class="exp-entry">
+      <div class="exp-header">
+        <span class="exp-company">{{ exp.company }}</span>
+        <span class="exp-location">{{ exp.location }}</span>
+      </div>
+      <div class="exp-sub">
+        <em class="exp-role">{{ exp.role }}</em>
+        <em class="exp-period">{{ exp.period }}</em>
+      </div>
+      <ul class="exp-bullets">
+        <li *ngFor="let b of exp.bullets" [class.hidden]="!b.trim()">{{ b }}</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- EXPERIENCIA EMPRESARIAL -->
+  <section *ngIf="cv.enterpriseExperiences.length > 0" class="cv-section">
+    <h2 class="section-title">EXPERIENCIA EMPRESARIAL</h2>
+    <div class="section-divider"></div>
+    <div *ngFor="let exp of cv.enterpriseExperiences" class="exp-entry">
+      <div class="exp-header">
+        <span class="exp-company">{{ exp.company }}</span>
+        <span class="exp-location">{{ exp.location }}</span>
+      </div>
+      <div class="exp-sub">
+        <em class="exp-role">{{ exp.role }}</em>
+        <em class="exp-period">{{ exp.period }}</em>
+      </div>
+      <ul class="exp-bullets">
+        <li *ngFor="let b of exp.bullets" [class.hidden]="!b.trim()">{{ b }}</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- HABILIDADES TÉCNICAS -->
+  <section *ngIf="cv.technicalSkills.length > 0" class="cv-section">
+    <h2 class="section-title">HABILIDADES TÉCNICAS</h2>
+    <div class="section-divider"></div>
+    <div *ngFor="let s of cv.technicalSkills" class="skill-row">
+      <strong>{{ s.category }}:</strong> {{ s.skills }}
+    </div>
+  </section>
+
+  <!-- EDUCACIÓN -->
+  <section *ngIf="cv.education.length > 0" class="cv-section">
+    <h2 class="section-title">EDUCACIÓN</h2>
+    <div class="section-divider"></div>
+    <div *ngFor="let edu of cv.education" class="edu-entry">
+      <div class="exp-header">
+        <strong>{{ edu.institution }}</strong>
+        <span class="exp-location">{{ edu.location }}</span>
+      </div>
+      <div class="exp-sub">
+        <span>{{ edu.degree }}</span>
+        <em class="exp-period">{{ edu.period }}</em>
+      </div>
+    </div>
+  </section>
+
+  <!-- HABILIDADES ADICIONALES -->
+  <section *ngIf="cv.languages.length > 0 || cv.softSkills.length > 0" class="cv-section">
+    <h2 class="section-title">HABILIDADES ADICIONALES</h2>
+    <div class="section-divider"></div>
+    <div *ngIf="cv.languages.length > 0" class="skill-row">
+      <strong>Idiomas:</strong>
+      <span *ngFor="let l of cv.languages; let last = last">
+        {{ l.language }} — {{ l.level }}<span *ngIf="!last"> &nbsp;|&nbsp; </span>
+      </span>
+    </div>
+    <div *ngIf="cv.softSkills.length > 0" class="skill-row">
+      <strong>Habilidades Blandas:</strong>
+      <span *ngFor="let s of cv.softSkills; let last = last">
+        {{ s.skill }}<span *ngIf="!last"> · </span>
+      </span>
+    </div>
+  </section>
+
+</div>
