@@ -1,33 +1,32 @@
 <div class="cv-page" id="cv-content">
-
   <!-- HEADER -->
-<header class="cv-header">
-  <h1>{{ cv.header.name }}</h1>
-  <div class="cv-contact">
-    <span *ngIf="cv.header.location">{{ cv.header.location }}</span>
-    <span *ngIf="cv.header.phone">{{ cv.header.phone }}</span>
-    
-    <a *ngIf="cv.header.email" [href]="'mailto:' + cv.header.email">
-      {{ cv.header.email }}
-    </a>
+  <header class="cv-header">
+    <h1>{{ cv.header.name }}</h1>
+    <div class="cv-contact">
+      <span *ngIf="cv.header.location">{{ cv.header.location }}</span>
+      <span *ngIf="cv.header.phone">{{ cv.header.phone }}</span>
 
-    <a *ngIf="cv.header.linkedin" [href]="cv.header.linkedin" target="_blank">
-      LinkedIn
-    </a>
+      <a *ngIf="cv.header.email" [href]="'mailto:' + cv.header.email">
+        {{ cv.header.email }}
+      </a>
 
-    <a *ngIf="cv.header.github" [href]="cv.header.github" target="_blank">
-      GitHub
-    </a>
+      <a *ngIf="cv.header.linkedin" [href]="cv.header.linkedin" target="_blank">
+        LinkedIn
+      </a>
 
-    <a *ngIf="cv.header.tiktok" [href]="cv.header.tiktok" target="_blank">
-      TikTok
-    </a>
+      <a *ngIf="cv.header.github" [href]="cv.header.github" target="_blank">
+        GitHub
+      </a>
 
-    <a *ngIf="cv.header.youtube" [href]="cv.header.youtube" target="_blank">
-      YouTube
-    </a>
-  </div>
-</header>
+      <a *ngIf="cv.header.tiktok" [href]="cv.header.tiktok" target="_blank">
+        TikTok
+      </a>
+
+      <a *ngIf="cv.header.youtube" [href]="cv.header.youtube" target="_blank">
+        YouTube
+      </a>
+    </div>
+  </header>
 
   <!-- PERFIL PROFESIONAL -->
   <section *ngIf="activeProfile?.text" class="cv-section">
@@ -48,11 +47,17 @@
       <div class="exp-sub">
         <em class="exp-role">{{ exp.role }}</em>
         <em class="exp-period">
-         {{ cvService.lang() === 'en' ? cvService.translatePeriod(exp.period) : exp.period }}
+          {{
+            cvService.lang() === "en"
+              ? cvService.translatePeriod(exp.period)
+              : exp.period
+          }}
         </em>
       </div>
       <ul class="exp-bullets">
-        <li *ngFor="let b of exp.bullets" [class.hidden]="!b.trim()">{{ b }}</li>
+        <li *ngFor="let b of exp.bullets" [class.hidden]="!b.trim()">
+          {{ b }}
+        </li>
       </ul>
     </div>
   </section>
@@ -63,7 +68,18 @@
     <div class="section-divider"></div>
     <div *ngFor="let exp of cv.enterpriseExperiences" class="exp-entry">
       <div class="exp-header">
-        <span class="exp-company">{{ exp.company }}</span>
+        <a
+          *ngIf="exp.companyUrl; else noLink"
+          [href]="exp.companyUrl"
+          target="_blank"
+          class="exp-company"
+          style="text-decoration: underline; cursor: pointer"
+        >
+          {{ exp.company }}
+        </a>
+        <ng-template #noLink>
+          <span class="exp-company">{{ exp.company }}</span>
+        </ng-template>
         <span class="exp-location">{{ exp.location }}</span>
       </div>
       <div class="exp-sub">
@@ -71,7 +87,9 @@
         <em class="exp-period">{{ exp.period }}</em>
       </div>
       <ul class="exp-bullets">
-        <li *ngFor="let b of exp.bullets" [class.hidden]="!b.trim()">{{ b }}</li>
+        <li *ngFor="let b of exp.bullets" [class.hidden]="!b.trim()">
+          {{ b }}
+        </li>
       </ul>
     </div>
   </section>
@@ -97,20 +115,28 @@
       <div class="exp-sub">
         <span>{{ edu.degree }}</span>
         <em class="exp-period">
-          {{ cvService.lang() === 'en' ? cvService.translatePeriod(edu.period) : edu.period }}
+          {{
+            cvService.lang() === "en"
+              ? cvService.translatePeriod(edu.period)
+              : edu.period
+          }}
         </em>
       </div>
     </div>
   </section>
 
   <!-- HABILIDADES ADICIONALES -->
-  <section *ngIf="cv.languages.length > 0 || cv.softSkills.length > 0" class="cv-section">
+  <section
+    *ngIf="cv.languages.length > 0 || cv.softSkills.length > 0"
+    class="cv-section"
+  >
     <h2 class="section-title">{{ labels.additional }}</h2>
     <div class="section-divider"></div>
     <div *ngIf="cv.languages.length > 0" class="skill-row">
       <strong>{{ labels.languages }}</strong>
       <span *ngFor="let l of cv.languages; let last = last">
-        {{ l.language }} — {{ l.level }}<span *ngIf="!last"> &nbsp;|&nbsp; </span>
+        {{ l.language }} — {{ l.level
+        }}<span *ngIf="!last"> &nbsp;|&nbsp; </span>
       </span>
     </div>
     <div *ngIf="cv.softSkills.length > 0" class="skill-row">
@@ -120,5 +146,4 @@
       </span>
     </div>
   </section>
-
 </div>
