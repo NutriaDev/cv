@@ -47,7 +47,9 @@
       </div>
       <div class="exp-sub">
         <em class="exp-role">{{ exp.role }}</em>
-        <em class="exp-period">{{ exp.period }}</em>
+        <em class="exp-period">
+         {{ cvService.lang() === 'en' ? cvService.translatePeriod(exp.period) : exp.period }}
+        </em>
       </div>
       <ul class="exp-bullets">
         <li *ngFor="let b of exp.bullets" [class.hidden]="!b.trim()">{{ b }}</li>
@@ -94,7 +96,9 @@
       </div>
       <div class="exp-sub">
         <span>{{ edu.degree }}</span>
-        <em class="exp-period">{{ edu.period }}</em>
+        <em class="exp-period">
+          {{ cvService.lang() === 'en' ? cvService.translatePeriod(edu.period) : edu.period }}
+        </em>
       </div>
     </div>
   </section>

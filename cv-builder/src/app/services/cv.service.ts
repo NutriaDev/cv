@@ -220,6 +220,31 @@ export class CvService {
     softSkills: 'Soft Skills:',
   };
 
+  translatePeriod(period: string): string {
+  const months: Record<string, string> = {
+    'Enero': 'January',
+    'Febrero': 'February',
+    'Marzo': 'March',
+    'Abril': 'April',
+    'Mayo': 'May',
+    'Junio': 'June',
+    'Julio': 'July',
+    'Agosto': 'August',
+    'Septiembre': 'September',
+    'Octubre': 'October',
+    'Noviembre': 'November',
+    'Diciembre': 'December',
+    'Actualmente': 'Present',
+    'Actualidad': 'Present',
+  };
+
+  let result = period;
+  for (const [es, en] of Object.entries(months)) {
+    result = result.replace(es, en);
+  }
+  return result;
+}
+
   private load(): CvData {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
