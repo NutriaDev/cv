@@ -46,10 +46,10 @@
         </div>
         <div *ngFor="let p of cv.profiles" class="profile-card" [class.active]="p.id === cv.activeProfileId">
           <div class="profile-card-header">
-            <input type="text" [value]="p.name" (input)="updateProfile(p.id, 'name', $any($event.target).value)" class="profile-name-input" placeholder="Nombre del perfil" />
+            <input type="text" [value]="p.name" (change)="updateProfile(p.id, 'name', $any($event.target).value)" class="profile-name-input" placeholder="Nombre del perfil" />
             <button *ngIf="cv.profiles.length > 1" class="btn-icon danger" (click)="removeProfile(p.id)">✕</button>
           </div>
-          <textarea rows="5" [value]="p.text" (input)="updateProfile(p.id, 'text', $any($event.target).value)" placeholder="Resumen profesional para este stack..."></textarea>
+          <textarea rows="5" [value]="p.text" (change)="updateProfile(p.id, 'text', $any($event.target).value)" placeholder="Resumen profesional para este stack..."></textarea>
           <button *ngIf="p.id !== cv.activeProfileId" class="btn-use" (click)="cvService.update({ activeProfileId: p.id })">Usar este perfil →</button>
         </div>
         <button class="btn-add" (click)="addProfile()">+ Nuevo perfil de stack</button>
@@ -75,10 +75,10 @@
         <p class="hint">Skills separadas por comas. Cada categoría = una fila.</p>
         <div *ngFor="let s of cv.technicalSkills" class="skill-card">
           <div class="skill-header">
-            <input type="text" [value]="s.category" (input)="updateSkill(s.id, 'category', $any($event.target).value)" class="skill-cat-input" placeholder="Categoría" />
+            <input type="text" [value]="s.category" (change)="updateSkill(s.id, 'category', $any($event.target).value)" class="skill-cat-input" placeholder="Categoría" />
             <button class="btn-icon danger" (click)="removeSkill(s.id)">✕</button>
           </div>
-          <textarea rows="2" [value]="s.skills" (input)="updateSkill(s.id, 'skills', $any($event.target).value)" placeholder="skill1, skill2, skill3..."></textarea>
+          <textarea rows="2" [value]="s.skills" (change)="updateSkill(s.id, 'skills', $any($event.target).value)" placeholder="skill1, skill2, skill3..."></textarea>
         </div>
         <button class="btn-add" (click)="addSkill()">+ Agregar categoría</button>
       </ng-container>
@@ -89,11 +89,11 @@
         <div *ngFor="let edu of cv.education" class="edu-card">
           <div style="display:flex;justify-content:flex-end;margin-bottom:8px"><button class="btn-icon danger" style="font-size:10px;padding:3px 8px" (click)="removeEdu(edu.id)">✕ Eliminar</button></div>
           <div class="field-row">
-            <div class="field-group"><label>Institución</label><input type="text" [value]="edu.institution" (input)="updateEdu(edu.id, 'institution', $any($event.target).value)" /></div>
-            <div class="field-group"><label>Ubicación</label><input type="text" [value]="edu.location" (input)="updateEdu(edu.id, 'location', $any($event.target).value)" /></div>
+            <div class="field-group"><label>Institución</label><input type="text" [value]="edu.institution" (change)="updateEdu(edu.id, 'institution', $any($event.target).value)" /></div>
+            <div class="field-group"><label>Ubicación</label><input type="text" [value]="edu.location" (change)="updateEdu(edu.id, 'location', $any($event.target).value)" /></div>
           </div>
-          <div class="field-group"><label>Título / Programa</label><input type="text" [value]="edu.degree" (input)="updateEdu(edu.id, 'degree', $any($event.target).value)" /></div>
-          <div class="field-group"><label>Periodo</label><input type="text" [value]="edu.period" (input)="updateEdu(edu.id, 'period', $any($event.target).value)" /></div>
+          <div class="field-group"><label>Título / Programa</label><input type="text" [value]="edu.degree" (change)="updateEdu(edu.id, 'degree', $any($event.target).value)" /></div>
+          <div class="field-group"><label>Periodo</label><input type="text" [value]="edu.period" (change)="updateEdu(edu.id, 'period', $any($event.target).value)" /></div>
         </div>
         <button class="btn-add" (click)="addEdu()">+ Agregar educación</button>
       </ng-container>
@@ -102,15 +102,15 @@
       <ng-container *ngIf="activeSection === 'additional'">
         <div class="section-label">IDIOMAS</div>
         <div *ngFor="let l of cv.languages" class="lang-row">
-          <input type="text" [value]="l.language" (input)="updateLang(l.id, 'language', $any($event.target).value)" placeholder="Idioma" />
-          <input type="text" [value]="l.level" (input)="updateLang(l.id, 'level', $any($event.target).value)" placeholder="Nivel (B2, Nativo...)" />
+          <input type="text" [value]="l.language" (change)="updateLang(l.id, 'language', $any($event.target).value)" placeholder="Idioma" />
+          <input type="text" [value]="l.level" (change)="updateLang(l.id, 'level', $any($event.target).value)" placeholder="Nivel (B2, Nativo...)" />
           <button class="btn-icon danger" (click)="removeLang(l.id)">✕</button>
         </div>
         <button class="btn-add" style="margin-bottom:24px" (click)="addLang()">+ Idioma</button>
         <div class="section-label">HABILIDADES BLANDAS</div>
         <div class="soft-chips">
           <div *ngFor="let s of cv.softSkills" class="chip">
-            <input type="text" [value]="s.skill" (input)="updateSoft(s.id, $any($event.target).value)" [style.width.px]="Math.max(70, s.skill.length * 7)" />
+            <input type="text" [value]="s.skill" (change)="updateSoft(s.id, $any($event.target).value)" [style.width.px]="Math.max(70, s.skill.length * 7)" />
             <button (click)="removeSoft(s.id)">×</button>
           </div>
         </div>
