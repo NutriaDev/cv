@@ -93,7 +93,7 @@ export const INITIAL_CV: CvData = {
   enterpriseExperiences: [
     {
       id: 1,
-      company: 'Topaz, Stefanini',      
+      company: 'Topaz, Stefanini',
       location: 'Bogotá, D.C.',
       role: 'Desarrollador Full Stack - Proyectos Empresariales',
       period: 'Marzo 2025 - Agosto 2025',
@@ -140,11 +140,35 @@ export const INITIAL_CV: CvData = {
     },
   ],
   technicalSkills: [
-    { id: 1, category: 'Backend', skills: 'Java, Spring Boot, Spring Security, Node.js, Express, APIs REST, JWT, Maven' },
-    { id: 2, category: 'Frontend', skills: 'Angular, React, Next.js, JavaScript, TypeScript, HTML5, CSS3, Tailwind CSS, Vite, Axios' },
-    { id: 3, category: 'Bases de Datos', skills: 'PostgreSQL, MySQL, MongoDB, JPA/Hibernate, SQL Server' },
-    { id: 4, category: 'DevOps & Tools', skills: 'Git, GitFlow, GitHub, Docker, AWS (en aprendizaje), ClickUp, Jira' },
-    { id: 5, category: 'Arquitectura', skills: 'Arquitectura Limpia, Hexagonal, DDD, Microservicios, SOLID, Eureka, SpringCloud, Scrum' },
+    {
+      id: 1,
+      category: 'Backend',
+      skills:
+        'Java, Spring Boot, Spring Security, Node.js, Express, APIs REST, JWT, Maven',
+    },
+    {
+      id: 2,
+      category: 'Frontend',
+      skills:
+        'Angular, React, Next.js, JavaScript, TypeScript, HTML5, CSS3, Tailwind CSS, Vite, Axios',
+    },
+    {
+      id: 3,
+      category: 'Bases de Datos',
+      skills: 'PostgreSQL, MySQL, MongoDB, JPA/Hibernate, SQL Server',
+    },
+    {
+      id: 4,
+      category: 'DevOps & Tools',
+      skills:
+        'Git, GitFlow, GitHub, Docker, AWS (en aprendizaje), ClickUp, Jira',
+    },
+    {
+      id: 5,
+      category: 'Arquitectura',
+      skills:
+        'Arquitectura Limpia, Hexagonal, DDD, Microservicios, SOLID, Eureka, SpringCloud, Scrum',
+    },
   ],
   education: [
     {
@@ -172,6 +196,29 @@ export const INITIAL_CV: CvData = {
 @Injectable({ providedIn: 'root' })
 export class CvService {
   cv = signal<CvData>(this.load());
+  lang = signal<'es' | 'en'>('es');
+
+  readonly labelsEs = {
+    profile: 'PERFIL PROFESIONAL',
+    experience: 'EXPERIENCIA PROFESIONAL',
+    enterprise: 'EXPERIENCIA EMPRESARIAL',
+    skills: 'HABILIDADES TÉCNICAS',
+    education: 'EDUCACIÓN',
+    additional: 'HABILIDADES ADICIONALES',
+    languages: 'Idiomas:',
+    softSkills: 'Habilidades Blandas:',
+  };
+
+  readonly labelsEn = {
+    profile: 'PROFESSIONAL PROFILE',
+    experience: 'PROFESSIONAL EXPERIENCE',
+    enterprise: 'CORPORATE EXPERIENCE',
+    skills: 'TECHNICAL SKILLS',
+    education: 'EDUCATION',
+    additional: 'ADDITIONAL SKILLS',
+    languages: 'Languages:',
+    softSkills: 'Soft Skills:',
+  };
 
   private load(): CvData {
     try {
@@ -187,7 +234,7 @@ export class CvService {
   }
 
   update(data: Partial<CvData>): void {
-    this.cv.update(current => ({ ...current, ...data }));
+    this.cv.update((current) => ({ ...current, ...data }));
     this.save();
   }
 
@@ -197,7 +244,9 @@ export class CvService {
   }
 
   exportJson(): void {
-    const blob = new Blob([JSON.stringify(this.cv(), null, 2)], { type: 'application/json' });
+    const blob = new Blob([JSON.stringify(this.cv(), null, 2)], {
+      type: 'application/json',
+    });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;

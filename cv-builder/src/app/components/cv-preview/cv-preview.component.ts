@@ -11,10 +11,17 @@ import { CvData } from '../../models/cv.model';
   styleUrls: ['./cv-preview.component.scss']
 })
 export class CvPreviewComponent {
+
   cvService = inject(CvService);
 
   get cv(): CvData { return this.cvService.cv(); }
   get activeProfile() {
     return this.cv.profiles.find(p => p.id === this.cv.activeProfileId);
   }
+
+  get labels() {
+  return this.cvService.lang() === 'en'
+    ? this.cvService.labelsEn
+    : this.cvService.labelsEs;
+}
 }

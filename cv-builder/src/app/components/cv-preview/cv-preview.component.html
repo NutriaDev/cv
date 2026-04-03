@@ -31,14 +31,14 @@
 
   <!-- PERFIL PROFESIONAL -->
   <section *ngIf="activeProfile?.text" class="cv-section">
-    <h2 class="section-title">PERFIL PROFESIONAL</h2>
+    <h2 class="section-title">{{ labels.profile }}</h2>
     <div class="section-divider"></div>
     <p class="profile-text">{{ activeProfile!.text }}</p>
   </section>
 
   <!-- EXPERIENCIA PROFESIONAL -->
   <section *ngIf="cv.experiences.length > 0" class="cv-section">
-    <h2 class="section-title">EXPERIENCIA PROFESIONAL</h2>
+    <h2 class="section-title">{{ labels.experience }}</h2>
     <div class="section-divider"></div>
     <div *ngFor="let exp of cv.experiences" class="exp-entry">
       <div class="exp-header">
@@ -57,7 +57,7 @@
 
   <!-- EXPERIENCIA EMPRESARIAL -->
   <section *ngIf="cv.enterpriseExperiences.length > 0" class="cv-section">
-    <h2 class="section-title">EXPERIENCIA EMPRESARIAL</h2>
+    <h2 class="section-title">{{ labels.enterprise }}</h2>
     <div class="section-divider"></div>
     <div *ngFor="let exp of cv.enterpriseExperiences" class="exp-entry">
       <div class="exp-header">
@@ -76,7 +76,7 @@
 
   <!-- HABILIDADES TÉCNICAS -->
   <section *ngIf="cv.technicalSkills.length > 0" class="cv-section">
-    <h2 class="section-title">HABILIDADES TÉCNICAS</h2>
+    <h2 class="section-title">{{ labels.skills }}</h2>
     <div class="section-divider"></div>
     <div *ngFor="let s of cv.technicalSkills" class="skill-row">
       <strong>{{ s.category }}:</strong> {{ s.skills }}
@@ -85,7 +85,7 @@
 
   <!-- EDUCACIÓN -->
   <section *ngIf="cv.education.length > 0" class="cv-section">
-    <h2 class="section-title">EDUCACIÓN</h2>
+    <h2 class="section-title">{{ labels.education }}</h2>
     <div class="section-divider"></div>
     <div *ngFor="let edu of cv.education" class="edu-entry">
       <div class="exp-header">
@@ -101,16 +101,16 @@
 
   <!-- HABILIDADES ADICIONALES -->
   <section *ngIf="cv.languages.length > 0 || cv.softSkills.length > 0" class="cv-section">
-    <h2 class="section-title">HABILIDADES ADICIONALES</h2>
+    <h2 class="section-title">{{ labels.additional }}</h2>
     <div class="section-divider"></div>
     <div *ngIf="cv.languages.length > 0" class="skill-row">
-      <strong>Idiomas:</strong>
+      <strong>{{ labels.languages }}</strong>
       <span *ngFor="let l of cv.languages; let last = last">
         {{ l.language }} — {{ l.level }}<span *ngIf="!last"> &nbsp;|&nbsp; </span>
       </span>
     </div>
     <div *ngIf="cv.softSkills.length > 0" class="skill-row">
-      <strong>Habilidades Blandas:</strong>
+      <strong>{{ labels.softSkills }}</strong>
       <span *ngFor="let s of cv.softSkills; let last = last">
         {{ s.skill }}<span *ngIf="!last"> · </span>
       </span>

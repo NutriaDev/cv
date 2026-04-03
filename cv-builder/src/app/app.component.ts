@@ -135,37 +135,9 @@ export class AppComponent {
   }
 
   async translateToEnglish() {
-    this.translating = true;
-    try {
-      const prompt = `Translate all Spanish text VALUES in this CV JSON to English.
-Rules:
-- Keep all JSON keys EXACTLY as they are
-- Only translate string values that are human-readable text
-- Keep URLs, emails, phones, proper names, and technology names unchanged
-- Return ONLY the raw JSON object, no markdown, no explanation
-
-JSON:
-${JSON.stringify(this.cv, null, 2)}`;
-
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 6000,
-          messages: [{ role: 'user', content: prompt }],
-        }),
-      });
-      const data = await res.json();
-      const raw = data.content[0].text.replace(/```json|```/g, '').trim();
-      const translated = JSON.parse(raw) as CvData;
-      this.cvService.cv.set(translated);
-      this.cvService.save();
-      this.showToast('¡CV traducido al inglés! ✓');
-    } catch (e: any) {
-      this.showToast('Error: ' + e.message, false);
-    }
-    this.translating = false;
+    const current = this.cvService.lang();
+  this.cvService.lang.set(current === 'es' ? 'en' : 'es');
+  this.showToast(current === 'es' ? '🇺🇸 Cambiado a inglés' : '🇨🇴 Cambiado a español');
   }
 
   exportJson() { this.cvService.exportJson(); }
