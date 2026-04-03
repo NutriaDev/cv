@@ -53,6 +53,7 @@ export class ExperienceEditorComponent implements OnInit {
     const newExp: CvExperience = {
       id: Date.now(),
       company: 'Nueva Empresa',
+      companyUrl: '',
       location: 'Ciudad',
       role: 'Cargo / Rol',
       period: 'Mes Año - Mes Año',

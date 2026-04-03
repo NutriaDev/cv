@@ -18,6 +18,7 @@ export interface CvProfile {
 export interface CvExperience {
   id: number;
   company: string;
+  companyUrl?: string;
   location: string;
   role: string;
   period: string;

@@ -36,6 +36,7 @@ export const INITIAL_CV: CvData = {
     {
       id: 1,
       company: 'Proyecto SIGEBI - SENA',
+      companyUrl: 'https://github.com/tu-proyecto',
       location: 'Bogotá, D.C.',
       role: 'Desarrollador Full-Stack',
       period: 'Diciembre 2025 - Actualmente',
@@ -51,6 +52,7 @@ export const INITIAL_CV: CvData = {
     {
       id: 2,
       company: 'Dragones Dev',
+      companyUrl: 'https://github.com/tu-proyecto',
       location: 'Bogotá, D.C.',
       role: 'Desarrollador Full-Stack',
       period: 'Agosto 2025 - Actualidad',
@@ -64,6 +66,7 @@ export const INITIAL_CV: CvData = {
     {
       id: 3,
       company: 'Microservicio Eduactivo',
+      companyUrl: 'https://github.com/tu-proyecto',
       location: 'Soacha, Cundinamarca',
       role: 'Desarrollador Back-end',
       period: 'Febrero 2025 - Marzo 2025',
@@ -76,6 +79,7 @@ export const INITIAL_CV: CvData = {
     {
       id: 4,
       company: 'Proyecto GuardianShop',
+      companyUrl: 'https://github.com/tu-proyecto',
       location: 'Bogotá, D.C.',
       role: 'Desarrolladora Front-End React - Java - SpringBoot',
       period: 'Septiembre 2024 - Febrero 2025',
@@ -89,7 +93,7 @@ export const INITIAL_CV: CvData = {
   enterpriseExperiences: [
     {
       id: 1,
-      company: 'Topaz, Stefanini',
+      company: 'Topaz, Stefanini',      
       location: 'Bogotá, D.C.',
       role: 'Desarrollador Full Stack - Proyectos Empresariales',
       period: 'Marzo 2025 - Agosto 2025',

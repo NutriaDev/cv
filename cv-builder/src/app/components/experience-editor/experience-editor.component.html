@@ -18,10 +18,17 @@
         <span class="card-company">{{ exp.company }}</span>
         <span class="card-period">{{ exp.period }}</span>
       </div>
-      <button class="btn-icon" [class.active]="expandedId === exp.id" (click)="toggle(exp.id)" title="Editar">
-        {{ expandedId === exp.id ? '▲' : '✏' }}
+      <button
+        class="btn-icon"
+        [class.active]="expandedId === exp.id"
+        (click)="toggle(exp.id)"
+        title="Editar"
+      >
+        {{ expandedId === exp.id ? "▲" : "✏" }}
       </button>
-      <button class="btn-icon danger" (click)="remove(exp.id)" title="Eliminar">✕</button>
+      <button class="btn-icon danger" (click)="remove(exp.id)" title="Eliminar">
+        ✕
+      </button>
     </div>
 
     <!-- Card Body (expanded) -->
@@ -29,20 +36,49 @@
       <div class="field-row">
         <div class="field-group">
           <label>Empresa</label>
-          <input type="text" [(ngModel)]="exp.company" (ngModelChange)="updateField(exp.id, 'company', $event)" />
+          <input
+            type="text"
+            [(ngModel)]="exp.company"
+            (ngModelChange)="updateField(exp.id, 'company', $event)"
+          />
+          <!-- URL del proyecto -->
+          <input
+            type="text"
+            placeholder="https://..."
+            [ngModel]="exp.companyUrl"
+            (ngModelChange)="
+              updateField(
+                exp.id,
+                'companyUrl',
+                $event.startsWith('http') ? $event : 'https://' + $event
+              )
+            "
+          />
         </div>
         <div class="field-group">
           <label>Ubicación</label>
-          <input type="text" [(ngModel)]="exp.location" (ngModelChange)="updateField(exp.id, 'location', $event)" />
+          <input
+            type="text"
+            [(ngModel)]="exp.location"
+            (ngModelChange)="updateField(exp.id, 'location', $event)"
+          />
         </div>
       </div>
       <div class="field-group">
         <label>Cargo / Rol</label>
-        <input type="text" [(ngModel)]="exp.role" (ngModelChange)="updateField(exp.id, 'role', $event)" />
+        <input
+          type="text"
+          [(ngModel)]="exp.role"
+          (ngModelChange)="updateField(exp.id, 'role', $event)"
+        />
       </div>
       <div class="field-group">
         <label>Periodo</label>
-        <input type="text" [(ngModel)]="exp.period" (ngModelChange)="updateField(exp.id, 'period', $event)" />
+        <input
+          type="text"
+          [(ngModel)]="exp.period"
+          (ngModelChange)="updateField(exp.id, 'period', $event)"
+        />
       </div>
       <div class="field-group">
         <label>Logros <small>(una línea = un bullet)</small></label>
