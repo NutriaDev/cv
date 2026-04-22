@@ -8,7 +8,34 @@
   box-sizing: border-box;
 }
 
-// ── HEADER ────────────────────────────────────────
+/* ───────── CONTROL DE PAGINACIÓN ───────── */
+@media print {
+
+  .cv-page {
+    page-break-after: always;
+  }
+
+  .cv-section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .exp-entry {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .exp-bullets {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  ul, li {
+    page-break-inside: avoid;
+  }
+}
+
+/* ── HEADER ──────────────────────────────────────── */
 .cv-header {
   text-align: center;
   padding-bottom: 14px;
@@ -40,7 +67,7 @@
   }
 }
 
-// ── SECTION ────────────────────────────────────────
+/* ── SECTION ──────────────────────────────────────── */
 .cv-section {
   margin-bottom: 14px;
 }
@@ -61,7 +88,7 @@
   margin-bottom: 10px;
 }
 
-// ── PROFILE ────────────────────────────────────────
+/* ── PROFILE ──────────────────────────────────────── */
 .profile-text {
   margin: 0;
   text-align: justify;
@@ -69,7 +96,7 @@
   line-height: 1.55;
 }
 
-// ── EXPERIENCE ─────────────────────────────────────
+/* ── EXPERIENCE ───────────────────────────────────── */
 .exp-entry {
   margin-bottom: 12px;
 }
@@ -124,14 +151,14 @@
   }
 }
 
-// ── SKILLS ─────────────────────────────────────────
+/* ── SKILLS ───────────────────────────────────────── */
 .skill-row {
   font-size: 11px;
   line-height: 1.5;
   margin-bottom: 4px;
 }
 
-// ── EDUCATION ──────────────────────────────────────
+/* ── EDUCATION ────────────────────────────────────── */
 .edu-entry {
   margin-bottom: 8px;
 }
