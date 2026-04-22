@@ -12,27 +12,50 @@
 @media print {
 
   .cv-page {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 20mm;
+    box-sizing: border-box;
     page-break-after: always;
+    break-after: page;
   }
 
-  .cv-section {
-    page-break-inside: avoid;
+  .cv-page:last-child {
+    page-break-after: auto;
+  }
+
+  /* ── Prevent orphaned section headers ── */
+  .section-title {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .section-divider {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* ── Keep each entry intact ── */
+  .exp-entry,
+  .edu-entry {
     break-inside: avoid;
-  }
-
-  .exp-entry {
     page-break-inside: avoid;
-    break-inside: avoid;
   }
 
-  .exp-bullets {
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-
+  .exp-bullets,
   ul, li {
+    break-inside: avoid;
     page-break-inside: avoid;
   }
+}
+
+/* ── SIMULACIÓN DE PÁGINA EN PANTALLA ── */
+#cv-content {
+  position: relative;
+}
+
+.cv-section {
+  transition: margin-top 0.1s;
 }
 
 /* ── HEADER ──────────────────────────────────────── */
